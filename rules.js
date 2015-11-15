@@ -1,6 +1,6 @@
 "use strict";
 
-let rules = {
+var rules = {
   person: function(card, model) {
     if (!card.age) card.age = 0;
     card.age++;
@@ -40,7 +40,7 @@ let rules = {
   },
 
   adult: function(card, model) {
-    let forests = model.kindNearCard(Kind.forest, card);
+    var forests = model.kindNearCard(Kind.forest, card);
     if (percentOdds(5) && objLen(forests) > 10) {
       model.swapKind(forests[randomKey(forests)], Kind.forest, Kind.lumber);
     }
@@ -57,14 +57,14 @@ let rules = {
 };
 
 // Evalutes the model.
-let evaluate = function(model) {
+var evaluate = function(model) {
   model.year++;
 
   // Evaluate rules.
-  for (let kind in model.kindCard) {
-    let cards = model.kindCard[kind];
-    for (let id in cards) {
-      let fn = rules[kind];
+  for (var kind in model.kindCard) {
+    var cards = model.kindCard[kind];
+    for (var id in cards) {
+      var fn = rules[kind];
       if (fn) {
         rules[kind](cards[id], model);
       }

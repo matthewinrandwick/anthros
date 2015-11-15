@@ -1,7 +1,7 @@
 "use strict";
 
 /** Model represents a mapping between cards, places and kinds. */
-let Model = function() {
+var Model = function() {
   this.kindCard = {};
   this.places = {};
   this.placeKindCard = {};
@@ -16,7 +16,7 @@ Model.prototype.addPlace = function(place) {
 }
 
 Model.prototype.addReplicas = function(n, card) {
-  for (let i = 0; i < n; ++i) {
+  for (var i = 0; i < n; ++i) {
     this.addCard(Card(goog.object.clone(card)));
   }
 };
@@ -25,11 +25,11 @@ Model.prototype.addCard = function(card) {
   if (!card.id) {
     card.id = card.name + '-' + this.nextId++;
   }
-  let p = card.place.name;
+  var p = card.place.name;
 
-  for (let k in card.kind) {
+  for (var k in card.kind) {
     {
-      let d = this.kindCard[k];
+      var d = this.kindCard[k];
       if (!d) {
         d = {};
         this.kindCard[k] = d;
@@ -38,12 +38,12 @@ Model.prototype.addCard = function(card) {
     }
 
     {
-      let d1 = this.placeKindCard[p];
+      var d1 = this.placeKindCard[p];
       if (!d1) {
          d1 = {};
          this.placeKindCard[p] = d1;
       }
-      let d2 = d1[k];
+      var d2 = d1[k];
       if (!d2) {
         d2 = {};
         d1[k] = d2;
@@ -54,11 +54,11 @@ Model.prototype.addCard = function(card) {
 };
 
 Model.prototype.removeCard = function(card) {
-  let p = card.place.name;
+  var p = card.place.name;
 
-  for (let k in card.kind) {
+  for (var k in card.kind) {
     {
-      let d = this.kindCard[k];
+      var d = this.kindCard[k];
       if (!d) {
         continue;
       }
@@ -69,11 +69,11 @@ Model.prototype.removeCard = function(card) {
     }
 
     {
-      let d1 = this.placeKindCard[p];
+      var d1 = this.placeKindCard[p];
       if (!d1) {
         continue;
       }
-      let d2 = d1[k];
+      var d2 = d1[k];
       if (!d2) {
         continue;
       }
@@ -125,8 +125,8 @@ function Card(card) {
     throw Error('card has no kinds');
   }
   if (card.kind.length) {
-    let ks = {};
-    for (let i = 0; i < card.kind.length; ++i) {
+    var ks = {};
+    for (var i = 0; i < card.kind.length; ++i) {
       ks[card.kind[i]] = card.kind[i];
     }
     card.kind = ks;

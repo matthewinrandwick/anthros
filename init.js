@@ -1,6 +1,6 @@
 "use strict";
 
-let Kind = {
+var Kind = {
   male: 'male',
   female: 'female',
   person: 'person',
@@ -14,8 +14,8 @@ let Kind = {
   game: 'game',
 };
 
-let pop1 = function(model, name) {
-  let p = model.addPlace({name: name});
+var pop1 = function(model, name) {
+  var p = model.addPlace({name: name});
   model.addReplicas(10, {place: p, kind: [Kind.male, Kind.person, Kind.adult]});
   model.addReplicas(10, {place: p, kind: [Kind.female, Kind.person, Kind.adult]});
   model.addReplicas(50, {place: p, kind: [Kind.forest]});
@@ -24,8 +24,8 @@ let pop1 = function(model, name) {
 };
 
 
-let init = function() {
-  let model = new Model();
+var init = function() {
+  var model = new Model();
 
   pop1(model, "Mesopotamia");
   pop1(model, "Elamite mountains");
@@ -36,7 +36,7 @@ let init = function() {
 }
 
 
-let tick = function(model) {
+var tick = function(model) {
   render(model);
   evaluate(model);
   window.setTimeout(function() {tick(model); }, 100);
