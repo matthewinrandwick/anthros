@@ -1,5 +1,9 @@
 "use strict";
 
+/* global Model */
+/* global render */
+/* global evaluate */
+
 var Kind = {
   male: 'male',
   female: 'female',
@@ -28,12 +32,12 @@ var init = function() {
   var model = new Model();
 
   pop1(model, "Mesopotamia");
-  pop1(model, "Elamite mountains");
+  pop1(model, "Zagros mountains");
   pop1(model, "Egypt");
 
   tick(model);
   console.log(model);
-}
+};
 
 
 var tick = function(model) {

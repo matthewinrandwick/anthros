@@ -13,7 +13,7 @@ var Model = function() {
 Model.prototype.addPlace = function(place) {
   this.places[place.name] = place;
   return place;
-}
+};
 
 Model.prototype.addReplicas = function(n, card) {
   for (var i = 0; i < n; ++i) {
@@ -50,7 +50,7 @@ Model.prototype.addCard = function(card) {
       }
       d2[card.id] = card;
     }
-  };
+  }
 };
 
 Model.prototype.removeCard = function(card) {
@@ -63,7 +63,7 @@ Model.prototype.removeCard = function(card) {
         continue;
       }
       delete d[card.id];
-      if (Object.keys(d).length == 0) {
+      if (Object.keys(d).length === 0) {
         delete this.kindCard[k];
       }
     }
@@ -79,20 +79,20 @@ Model.prototype.removeCard = function(card) {
       }
       delete d2[card.id];
 
-      if (Object.keys(d2).length == 0) {
+      if (Object.keys(d2).length === 0) {
         delete d1[k];
       }
 
-      if (Object.keys(d1).length == 0) {
+      if (Object.keys(d1).length === 0) {
         delete this.placeKindCard[p];
       }
     }
-  };
+  }
 };
 
 Model.prototype.addKind = function(card, kind) {
   this.removeCard(card);
-  card.kind[kind] = kind
+  card.kind[kind] = kind;
   this.addCard(card);
 };
 
@@ -111,12 +111,12 @@ Model.prototype.swapKind = function(card, oldKind, newKind) {
 
 Model.prototype.kindNearCard = function(kind, card) {
   return this.placeKindCard[card.place.name][kind];
-}
+};
 
 // Card initializes a card.
 function Card(card) {
   if (!card.name) {
-    card.name = card.kind.join()
+    card.name = card.kind.join();
   }
   if (!card.place) {
     throw Error('card has no place');
@@ -132,4 +132,4 @@ function Card(card) {
     card.kind = ks;
   }
   return card;
-};
+}

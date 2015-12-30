@@ -2,11 +2,11 @@
 
 var dom = function(name, attrs, text) {
   return goog.dom.createDom(name, attrs, text);
-}
+};
 
 var addDom = function(name, attrs, text) {
   document.body.appendChild(dom(name, attrs, text));
-}
+};
 
 var render = function(model) {
   document.body.innerHTML = '';

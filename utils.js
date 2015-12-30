@@ -9,7 +9,7 @@ var objLen = function(obj) {
 };
 
 var oneOf = function(elems) {
-  return elems[Math.floor(Math.random() * elems.length)]
+  return elems[Math.floor(Math.random() * elems.length)];
 };
 
 var randomKey = function(obj) {
