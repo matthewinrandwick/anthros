@@ -1,7 +1,9 @@
 "use strict";
 
-goog.provide('dom');
+goog.require('goog.dom');
+
 goog.provide('addDom');
+goog.provide('dom');
 goog.provide('render');
 
 var dom = function(name, attrs, text) {

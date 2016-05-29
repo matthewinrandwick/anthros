@@ -76,7 +76,6 @@ var Rules = {
     },
 
     person: function(card, model) {
-      var forest = model.kindNearCard(Kind.forest, card);
       var people = model.kindNearCard(Kind.person, card);
       var food = model.kindNearCard(Kind.food, card);
 

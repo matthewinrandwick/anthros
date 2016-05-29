@@ -2,6 +2,8 @@
 
 goog.provide('Kind');
 
+goog.require('Model');
+
 /* global Model */
 /* global render */
 /* global evaluate */

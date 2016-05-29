@@ -1,7 +1,7 @@
 "use strict";
 
 goog.provide('Model');
-goog.require("goog.object");
+goog.require('goog.object');
 
 /**
  * Model represents a mapping between cards, places and kinds.
