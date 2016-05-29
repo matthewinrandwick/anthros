@@ -7,6 +7,7 @@ goog.require('Place');
 /* global Model */
 /* global render */
 /* global evaluate */
+/* global Kind */
 
 /**
  * @param {!Model} model
@@ -18,7 +19,7 @@ var pop1 = function(model, name) {
   model.addReplicas(10, {place: p, kind: [Kind.male, Kind.person, Kind.adult]});
   model.addReplicas(10, {place: p, kind: [Kind.female, Kind.person, Kind.adult]});
   model.addReplicas(50, {place: p, kind: [Kind.forest]});
-  model.addReplicas(200, {place: p, kind: [Kind.game]});
+  model.addReplicas(500, {place: p, kind: [Kind.game]});
   return p;
 };
 

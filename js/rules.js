@@ -22,7 +22,7 @@ var Kind = {
   food: 'food'
 };
 
-/* global Kind,percentOdds,objLen,Card,oneOf,randomKey */
+/* global Kind,percentOdds,objLen,Card,oneOf,randomKey,translate */
 
 /** @typedef Function(!CardType, !Model) */
 var Rule;
@@ -50,7 +50,8 @@ var Rules = {
     male:
       /** @param {!CardType} card @param {!Model} model */
       function(card, model) {
-        if (card.age > 70) model.removeCard(card);
+        var odds = translate(card.age || 0, [40, 50, 70, 75], [0, 1, 2, 20]);
+        if (percentOdds(odds)) model.removeCard(card);
       },
 
     female:
@@ -82,7 +83,9 @@ var Rules = {
     forest:
       /** @param {!CardType} card @param {!Model} model */
       function(card, model) {
-        if (percentOdds(2) && objLen(model.kindNearCard(Kind.forest, card)) < 50) {
+        var nearby = objLen(model.kindNearCard(Kind.forest, card));
+        var odds = translate(nearby, [40, 50], [2, 0]);
+        if (percentOdds(odds)) {
           model.addCard(Card({place: card.place, kind: [Kind.forest]}));
         }
       },
@@ -90,7 +93,9 @@ var Rules = {
     game:
       /** @param {!CardType} card @param {!Model} model */
       function(card, model) {
-        if (percentOdds(12) && objLen(model.kindNearCard(Kind.game, card)) < 400) {
+        var nearby = objLen(model.kindNearCard(Kind.game, card));
+        var odds = translate(nearby, [100, 200, 500, 600], [60, 13, 11, 0]);
+        if (percentOdds(odds)) {
           model.addCard(Card({place: card.place, kind: [Kind.game]}));
         }
       },
@@ -101,7 +106,8 @@ var Rules = {
       /** @param {!CardType} card @param {!Model} model */
       function(card, model) {
         var game = model.kindNearCard(Kind.game, card);
-        for (var x = 0; x < 10; x++) {
+        // One adult can hunt multiple times.
+        for (var x = 0; x < 3; x++) {
           var people = model.kindNearCard(Kind.person, card);
           var food = model.kindNearCard(Kind.food, card);
 
@@ -113,27 +119,6 @@ var Rules = {
           // Game are too hard to kill when numbers are low.
           if (objLen(game) > 50) {
             model.swapKind(game[randomKey(game)], Kind.game, Kind.food);
-          }
-        }
-      },
-
-    person:
-      /** @param {!CardType} card @param {!Model} model */
-      function(card, model) {
-        var people = model.kindNearCard(Kind.person, card);
-        var food = model.kindNearCard(Kind.food, card);
-
-        for (var x = 0; x < 10; x++) {
-          // Forage until we have enough food.
-          if (objLen(food) >= objLen(people)) {
-            return;
-          }
-
-          if (percentOdds(80)) {
-            model.addCard(Card({
-              place: card.place,
-              kind: [Kind.food],
-            }));
           }
         }
       },
