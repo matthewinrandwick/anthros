@@ -4,6 +4,7 @@ set -o errexit
 echo Compiling...
 ./closure-compiler/build/compiler.jar \
     --js $(cat $HERE/deps.txt) --env BROWSER --checks_only \
+    --hide_warnings_for closure-library/closure \
     --jscomp_error accessControls \
     --jscomp_error ambiguousFunctionDecl \
     --jscomp_error checkEventfulObjectDisposal \
@@ -44,6 +45,7 @@ echo Compiling...
     --jscomp_error uselessCode \
     --jscomp_error useOfGoogBase \
     --jscomp_error visibility \
-#    --jscomp_error reportUnknownTypes \
+    --jscomp_error reportUnknownTypes \
+    "$@"
 
 echo OK.
