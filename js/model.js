@@ -9,7 +9,7 @@ goog.require('goog.object');
  * @constructor
  * */
 var Model = function() {
-  /** @type {!Object<string,!CardType>} */
+  /** @type {!Object<string,!Object<string,!CardType>>} */
   this.kindCard = {};
   /** @type {!Object<string, !Place>} */
   this.places = {};
