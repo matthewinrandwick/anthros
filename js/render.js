@@ -1,17 +1,28 @@
 "use strict";
 
-goog.require('goog.dom');
-
 goog.provide('addDom');
 goog.provide('dom');
 goog.provide('render');
 
-var dom = function(name, attrs, text) {
-  return goog.dom.createDom(name, attrs, text);
+goog.require('goog.dom');
+
+
+/**
+ * @param {string} name
+ * @param {Object=} opt_attrs
+ * @param {string=} opt_text
+ */
+var dom = function(name, opt_attrs, opt_text) {
+  return goog.dom.createDom(name, opt_attrs, opt_text);
 };
 
-var addDom = function(name, attrs, text) {
-  document.body.appendChild(dom(name, attrs, text));
+/**
+ * @param {string} name
+ * @param {Object=} opt_attrs
+ * @param {string=} opt_text
+ */
+var addDom = function(name, opt_attrs, opt_text) {
+  document.body.appendChild(dom(name, opt_attrs, opt_text));
 };
 
 var render = function(model) {

@@ -1,6 +1,7 @@
 #!/bin/bash
 HERE="$(dirname $0)"
 set -o errexit
+echo Compiling...
 ./closure-compiler/build/compiler.jar \
     --js $(cat $HERE/deps.txt) --env BROWSER --checks_only \
     --jscomp_error accessControls \
@@ -31,7 +32,6 @@ set -o errexit
     --jscomp_error msgDescriptions \
     --jscomp_error newCheckTypes \
     --jscomp_error nonStandardJsDocs \
-#    --jscomp_error reportUnknownTypes \
     --jscomp_error strictModuleDepCheck \
     --jscomp_error suspiciousCode \
     --jscomp_error typeInvalidation \
@@ -44,5 +44,6 @@ set -o errexit
     --jscomp_error uselessCode \
     --jscomp_error useOfGoogBase \
     --jscomp_error visibility \
+#    --jscomp_error reportUnknownTypes \
 
 echo OK.
