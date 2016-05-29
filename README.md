@@ -7,6 +7,11 @@ It's a world, simulated like a card game, with rules that would be way too compl
 play practically. Think Conway's Game of Life but with more interesting rules, and with
 a graph for a world instead of a grid.
 
+## Can I see it run?
+
+Browse to https://cdn.rawgit.com/matthewinrandwick/anthros/master/index.html
+
+
 ## Basic Concepts
 
 ### Cards
