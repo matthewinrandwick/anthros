@@ -9,12 +9,12 @@ goog.require('goog.object');
  * @constructor
  * */
 var Model = function() {
-  /** @type {!Object.<string,!Object>} */
+  /** @type {!Object<string,!CardType>} */
   this.kindCard = {};
+  /** @type {!Object<string, !Place>} */
   this.places = {};
+  /** @type {!Object<string, !Object<string, !CardType>>} */
   this.placeKindCard = {};
-  this.nearPlacePlace = {};
-  this.nearPlacePlace = {};
   /** @type {number} */
   this.nextId = 1;
   /** @type {number} */
