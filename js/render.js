@@ -11,6 +11,7 @@ goog.require('goog.dom');
  * @param {string} name
  * @param {Object=} opt_attrs
  * @param {string=} opt_text
+ * @return {Element}
  */
 var dom = function(name, opt_attrs, opt_text) {
   return goog.dom.createDom(name, opt_attrs, opt_text);
@@ -25,6 +26,9 @@ var addDom = function(name, opt_attrs, opt_text) {
   document.body.appendChild(dom(name, opt_attrs, opt_text));
 };
 
+/**
+ * @param {!Model} model
+ */
 var render = function(model) {
   document.body.innerHTML = '';
   addDom('h1', {}, 'Anthros');

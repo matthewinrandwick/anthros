@@ -1,28 +1,18 @@
 "use strict";
 
-goog.provide('Kind');
 
 goog.require('Model');
+goog.require('Place');
 
 /* global Model */
 /* global render */
 /* global evaluate */
 
-var Kind = {
-  male: 'male',
-  female: 'female',
-  person: 'person',
-  adult: 'adult',
-  child: 'child',
-  elderly: 'elderly',
-
-  farm: 'farm',
-  forest: 'forest',
-  lumber: 'lumber',
-  game: 'game',
-  food: 'food'
-};
-
+/**
+ * @param {!Model} model
+ * @param {string} name
+ * @return {!Place}
+ */
 var pop1 = function(model, name) {
   var p = model.addPlace({name: name});
   model.addReplicas(10, {place: p, kind: [Kind.male, Kind.person, Kind.adult]});
@@ -45,6 +35,9 @@ var init = function() {
 };
 
 
+/**
+ * @param {!Model} model
+ */
 var tick = function(model) {
   render(model);
   evaluate(model);

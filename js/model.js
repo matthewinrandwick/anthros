@@ -1,6 +1,9 @@
 "use strict";
 
+goog.provide('CardType');
 goog.provide('Model');
+goog.provide('Place');
+
 goog.require('goog.object');
 
 /**
@@ -13,7 +16,7 @@ var Model = function() {
   this.kindCard = {};
   /** @type {!Object<string, !Place>} */
   this.places = {};
-  /** @type {!Object<string, !Object<string, !CardType>>} */
+  /** @type {!Object<string, !Object<string, !Object<string, !CardType>>>} */
   this.placeKindCard = {};
   /** @type {number} */
   this.nextId = 1;
@@ -28,21 +31,37 @@ var Place;
 
 /**
  * @typedef {{
+ *    id: string,
  *    name: string,
  *    kind: !Object<string, string>,
- *    place: !Place
- *    }}
+ *    place: !Place,
+ *
+ *    age: (number|undefined)
+ *  }}
  */
 var CardType;
 
 /**
+ * @typedef {{
+ *    kind: !Array<string>,
+ *    place: Place
+ *  }} card
+ */
+var LooseCardType;
+
+/**
  * @param {!Place} place
+ * @return {!Place}
  */
 Model.prototype.addPlace = function(place) {
   this.places[place.name] = place;
   return place;
 };
 
+/**
+ * @param {number} n
+ * @param {Object} card
+ */
 Model.prototype.addReplicas = function(n, card) {
   for (var i = 0; i < n; ++i) {
     var clone = /** @type !CardType */(goog.object.clone(card));
@@ -50,6 +69,9 @@ Model.prototype.addReplicas = function(n, card) {
   }
 };
 
+/**
+ * @param {!CardType} card
+ */
 Model.prototype.addCard = function(card) {
   if (!card.id) {
     card.id = card.name + '-' + this.nextId++;
@@ -67,11 +89,13 @@ Model.prototype.addCard = function(card) {
     }
 
     {
+      /** @type {!Object<string,!Object<string,!CardType>>} */
       var d1 = this.placeKindCard[p];
       if (!d1) {
          d1 = {};
          this.placeKindCard[p] = d1;
       }
+      /** @type {!Object<string,!CardType>} */
       var d2 = d1[k];
       if (!d2) {
         d2 = {};
@@ -82,6 +106,9 @@ Model.prototype.addCard = function(card) {
   }
 };
 
+/**
+ * @param {!CardType} card
+ */
 Model.prototype.removeCard = function(card) {
   var p = card.place.name;
 
@@ -119,18 +146,31 @@ Model.prototype.removeCard = function(card) {
   }
 };
 
+/**
+ * @param {!CardType} card
+ * @param {string} kind
+ */
 Model.prototype.addKind = function(card, kind) {
   this.removeCard(card);
   card.kind[kind] = kind;
   this.addCard(card);
 };
 
+/**
+ * @param {!CardType} card
+ * @param {string} kind
+ */
 Model.prototype.removeKind = function(card, kind) {
   this.removeCard(card);
   delete card.kind[kind];
   this.addCard(card);
 };
 
+/**
+ * @param {!CardType} card
+ * @param {string} oldKind
+ * @param {string} newKind
+ */
 Model.prototype.swapKind = function(card, oldKind, newKind) {
   this.removeCard(card);
   delete card.kind[oldKind];
@@ -138,6 +178,11 @@ Model.prototype.swapKind = function(card, oldKind, newKind) {
   this.addCard(card);
 };
 
+/**
+ * @param {string} kind
+ * @param {!CardType} card
+ * @return {!Object<string, !CardType>}
+ */
 Model.prototype.kindNearCard = function(kind, card) {
   return this.placeKindCard[card.place.name][kind] || {};
 };
@@ -161,6 +206,7 @@ function Card(card) {
 
   /** @type {!CardType} */
   var c = {
+    id: "", // set by Model.addCard.
     name: !card.name ? card.kind.join() : card.name,
     kind: {},
     place: card.place
