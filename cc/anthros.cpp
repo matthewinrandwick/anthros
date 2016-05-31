@@ -1,6 +1,6 @@
 #include <stdio.h>
 
 int main() {
-  printf("Anthros\n");
+  printf("Anthros boo\n");
   return 0;
 }
