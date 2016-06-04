@@ -2,9 +2,9 @@
 HERE="$(dirname $0)"
 set -o errexit
 echo Compiling...
-./closure-compiler/build/compiler.jar \
+./vendor/closure-compiler/build/compiler.jar \
     --js $(cat $HERE/deps.txt) --env BROWSER --checks_only \
-    --hide_warnings_for closure-library/closure \
+    --hide_warnings_for vendor/closure-library/closure \
     --jscomp_error accessControls \
     --jscomp_error ambiguousFunctionDecl \
     --jscomp_error checkEventfulObjectDisposal \
